@@ -6,21 +6,19 @@ import by.home.butek.smlr.model.repositories.LinkRepository;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.TestPropertySource;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DatabaseSetup(LinkRepositoryTest.DATASET)
 @TestPropertySource(locations = "classpath:repositories-test.properties")
 @DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = LinkRepositoryTest.DATASET)
-public class LinkRepositoryTest extends AbstractRepositoryTest {
+class LinkRepositoryTest extends AbstractRepositoryTest {
 
     static final String DATASET = "classpath:datasets/link-table.xml";
     private static final long LINK_NOT_FOUND = 1L;
@@ -32,25 +30,25 @@ public class LinkRepositoryTest extends AbstractRepositoryTest {
     private LinkRepository repository;
 
     @Test
-    public void findExisting() {
+    void findExisting() {
         Optional<Link> got = repository.findById(LINK_1_ID);
-        assertThat(got.isPresent(), equalTo(true));
+        assertThat(got.isPresent()).isTrue();
         Link link = got.get();
-        assertThat(link, equalTo(new Link(LINK_1_TEXT, LINK_1_ID)));
+        assertThat(link).isEqualTo(new Link(LINK_1_TEXT, LINK_1_ID));
     }
 
     @Test
-    public void findOneNotExisting() {
+    void findOneNotExisting() {
         Optional<Link> got = repository.findById(LINK_NOT_FOUND);
-        assertThat(got.isPresent(), equalTo(false));
+        assertThat(got.isPresent()).isFalse();
     }
 
     @Test
-    public void saveNew() {
+    void saveNew() {
         Link toBeSaved = new Link(LINK_TBS_TEXT);
         Link got = repository.save(toBeSaved);
         List<Link> list = repository.findAll();
-        assertThat(list, hasSize(4));
-        assertThat(got.getText(), equalTo(LINK_TBS_TEXT));
+        assertThat(list).hasSize(4);
+        assertThat(got.getText()).isEqualTo(LINK_TBS_TEXT);
     }
 }
