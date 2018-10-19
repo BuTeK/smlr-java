@@ -24,7 +24,7 @@ public class DefaultKeyMapperService implements KeyMapperService {
     }
 
     public String getLink(String key) {
-        Optional<Link> result = repo.findOne(converter.keyToId(key));
+        Optional<Link> result = repo.findById(converter.keyToId(key));
         return result.map(Link::getText).orElse(null);
     }
 }

@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface LinkRepository extends Repository<Link, Long> {
 
-    Optional<Link> findOne(Long id);
+    Optional<Link> findById(Long id);
     Link save(Link link);
     List<Link> findAll();
 

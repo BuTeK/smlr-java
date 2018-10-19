@@ -46,11 +46,11 @@ public class DefaultKeyMapperServiceTest {
         Mockito.when(converter.keyToId(KEY_B)).thenReturn(ID_B);
         Mockito.when(converter.idToKey(ID_B)).thenReturn(KEY_B);
 
-        Mockito.when(repo.findOne(Mockito.anyObject())).thenReturn(Optional.empty());
+        Mockito.when(repo.findById(Mockito.any())).thenReturn(Optional.empty());
         Mockito.when(repo.save(new Link(LINK_A))).thenReturn(LINK_OBJ_A);
         Mockito.when(repo.save(new Link(LINK_B))).thenReturn(LINK_OBJ_B);
-        Mockito.when(repo.findOne(ID_A)).thenReturn(Optional.of(LINK_OBJ_A));
-        Mockito.when(repo.findOne(ID_B)).thenReturn(Optional.of(LINK_OBJ_B));
+        Mockito.when(repo.findById(ID_A)).thenReturn(Optional.of(LINK_OBJ_A));
+        Mockito.when(repo.findById(ID_B)).thenReturn(Optional.of(LINK_OBJ_B));
     }
 
     @Test

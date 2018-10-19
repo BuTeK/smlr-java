@@ -33,7 +33,7 @@ public class LinkRepositoryTest extends AbstractRepositoryTest {
 
     @Test
     public void findExisting() {
-        Optional<Link> got = repository.findOne(LINK_1_ID);
+        Optional<Link> got = repository.findById(LINK_1_ID);
         assertThat(got.isPresent(), equalTo(true));
         Link link = got.get();
         assertThat(link, equalTo(new Link(LINK_1_TEXT, LINK_1_ID)));
@@ -41,7 +41,7 @@ public class LinkRepositoryTest extends AbstractRepositoryTest {
 
     @Test
     public void findOneNotExisting() {
-        Optional<Link> got = repository.findOne(LINK_NOT_FOUND);
+        Optional<Link> got = repository.findById(LINK_NOT_FOUND);
         assertThat(got.isPresent(), equalTo(false));
     }
 
