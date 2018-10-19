@@ -13,8 +13,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -29,9 +29,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 @ExtendWith(SpringExtension.class)
 @TestPropertySource(locations = "classpath:repositories-test.properties")
-@ContextConfiguration(classes = SmlrApplication.class)
+@SpringBootTest(classes = SmlrApplication.class)
 @WebAppConfiguration
-public class AddControllerTest {
+class AddControllerTest {
 
     private static final String LINK = "link";
     private static final String KEY = "key";
@@ -49,7 +49,7 @@ public class AddControllerTest {
     private AddController controller;
 
     @BeforeEach
-    public void init() {
+    void init() {
         MockitoAnnotations.initMocks(this);
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(webApplicationContext)
@@ -59,7 +59,7 @@ public class AddControllerTest {
     }
 
     @Test
-    public void whenUserAddLinkHeTakesAKey() throws Exception {
+    void whenUserAddLinkHeTakesAKey() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         mockMvc.perform(post("/add")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -69,7 +69,7 @@ public class AddControllerTest {
     }
 
     @Test
-    public void whenUserLinkAddLinkByFormHeTakesAWebPage() throws Exception {
+    void whenUserLinkAddLinkByFormHeTakesAWebPage() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/addhtml")
                 .param("link", LINK)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))

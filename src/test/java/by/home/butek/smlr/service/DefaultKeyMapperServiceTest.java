@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class DefaultKeyMapperServiceTest {
+class DefaultKeyMapperServiceTest {
 
     private static final String KEY = "aAbBcCbD";
     private static final String LINK_A = "http://google.com";
@@ -40,7 +40,7 @@ public class DefaultKeyMapperServiceTest {
 
 
     @BeforeEach
-    public void init() {
+    void init() {
         MockitoAnnotations.initMocks(this);
 
         Mockito.when(converter.keyToId(KEY_A)).thenReturn(ID_A);
@@ -56,7 +56,7 @@ public class DefaultKeyMapperServiceTest {
     }
 
     @Test
-    public void  clientCanAddLink() {
+    void  clientCanAddLink() {
         final String keyA = service.add(LINK_A);
         assertEquals(LINK_A, service.getLink(keyA));
         final String keyB = service.add(LINK_B);
@@ -65,7 +65,7 @@ public class DefaultKeyMapperServiceTest {
     }
 
     @Test
-    public void  clientCanNotTakeLinkIfNotFoundIsService() {
+    void  clientCanNotTakeLinkIfNotFoundIsService() {
         assertNull(service.getLink(KEY));
     }
 

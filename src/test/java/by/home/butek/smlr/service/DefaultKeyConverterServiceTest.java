@@ -6,12 +6,12 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DefaultKeyConverterServiceTest {
+class DefaultKeyConverterServiceTest {
 
     private KeyConverterService service = new DefaultKeyConverterService();
 
     @Test
-    public void givenIdMustBeConvertableBothWays() {
+    void givenIdMustBeConvertableBothWays() {
         final Random rand = new Random();
         for(int i = 0; i < 10000; i++) {
             Long initialId = Math.abs(rand.nextLong());

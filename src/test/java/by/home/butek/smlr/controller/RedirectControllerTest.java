@@ -11,7 +11,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -26,9 +26,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @TestPropertySource(locations = "classpath:repositories-test.properties")
-@ContextConfiguration(classes = SmlrApplication.class)
+@SpringBootTest(classes = SmlrApplication.class)
 @WebAppConfiguration
-public class RedirectControllerTest {
+class RedirectControllerTest {
 
     private static final String PATH = "aAbBcCdD";
     private static final String BAD_PATH = "ololo";
@@ -50,7 +50,7 @@ public class RedirectControllerTest {
     private RedirectController controller;
 
     @BeforeEach
-    public void init() {
+    void init() {
         MockitoAnnotations.initMocks(this);
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         Mockito.when(service.getLink(PATH)).thenReturn(HEADER_VALUE);
@@ -58,20 +58,20 @@ public class RedirectControllerTest {
     }
 
     @Test
-    public void controllerMustRedirectUsWhenRequestIsSuccessful() throws Exception {
+    void controllerMustRedirectUsWhenRequestIsSuccessful() throws Exception {
         mockMvc.perform(get("/" + PATH))
                 .andExpect(status().is(REDIRECT_STATUS))
                 .andExpect(header().string(HEADER_NAME, HEADER_VALUE));
     }
 
     @Test
-    public void controllerMustReturn404ifBadKey() throws Exception {
+    void controllerMustReturn404ifBadKey() throws Exception {
         mockMvc.perform(get("/" + BAD_PATH))
                 .andExpect(status().is(NOT_FOUND));
     }
 
     @Test
-    public void homeWorkFile() throws Exception {
+    void homeWorkFile() throws Exception {
         mockMvc.perform(get(""))
                 .andExpect(MockMvcResultMatchers.view().name("home"));
     }

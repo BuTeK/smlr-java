@@ -9,9 +9,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @ExtendWith(SpringExtension.class)
 @TestPropertySource(locations = "classpath:repositories-test.properties")
 @WebAppConfiguration
-public class SmlrApplicationTests {
+class SmlrApplicationTests {
 
     @Test
-    public void contextLoads() {
+    void contextLoads() {
     }
 }
