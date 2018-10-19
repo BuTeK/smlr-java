@@ -1,9 +1,10 @@
 package by.home.butek.smlr.service;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Random;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DefaultKeyConverterServiceTest {
 
@@ -16,7 +17,7 @@ public class DefaultKeyConverterServiceTest {
             Long initialId = Math.abs(rand.nextLong());
             String key = service.idToKey(initialId);
             Long id = service.keyToId(key);
-            Assert.assertEquals(initialId, id);
+            assertEquals(initialId, id);
         }
     }
 }

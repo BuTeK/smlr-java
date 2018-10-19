@@ -2,8 +2,8 @@ package by.home.butek.smlr.service;
 
 import by.home.butek.smlr.model.Link;
 import by.home.butek.smlr.model.repositories.LinkRepository;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -11,7 +11,9 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class DefaultKeyMapperServiceTest {
 
@@ -37,7 +39,7 @@ public class DefaultKeyMapperServiceTest {
     private LinkRepository repo;
 
 
-    @Before
+    @BeforeEach
     public void init() {
         MockitoAnnotations.initMocks(this);
 
