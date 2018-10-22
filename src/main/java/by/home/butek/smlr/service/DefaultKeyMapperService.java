@@ -19,8 +19,7 @@ public class DefaultKeyMapperService implements KeyMapperService {
 
     @Transactional
     public String add(String link) {
-        Link link1 = repo.save(new Link(link));
-        return converter.idToKey(link1.getId());
+        return converter.idToKey(repo.save(new Link(link)).getId());
     }
 
     public String getLink(String key) {
