@@ -2,6 +2,7 @@ package by.home.butek.smlr.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "links")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Link {
 
     private String text = "";
