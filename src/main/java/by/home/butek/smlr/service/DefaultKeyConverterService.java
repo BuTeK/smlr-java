@@ -11,7 +11,7 @@ public class DefaultKeyConverterService implements KeyConverterService {
     private static final char[] CHARS = "qwertyuiopasdfgQWERTYUIOPASDFG1234567890-_".toCharArray();
     private static final Map<Character, Integer> CHARACTER_MAP = new HashMap<>();
 
-    {
+    public DefaultKeyConverterService() {
         for (int i = 0; i < CHARS.length; i++) {
             CHARACTER_MAP.put(CHARS[i], i);
         }
