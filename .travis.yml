@@ -17,6 +17,14 @@ env:
   - MAVEN_OPTS="-Xmx256m"
   - JAVA_OPTS="-Xmx256m"
 
+addons:
+  sonarcloud:
+    organization: "butek-github"
+    token:
+      secure: $SONAR_TOKEN
+script:
+- sonar-scanner
+
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 - docker login -u $D_USER -p $D_PASS
