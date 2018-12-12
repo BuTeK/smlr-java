@@ -22,14 +22,13 @@ public class AddController {
     @Autowired
     public KeyMapperService service;
 
-    @RequestMapping(path = "add", method = RequestMethod.POST)
+    @PostMapping(path = "add")
     @ResponseBody
     public ResponseEntity addRest(@RequestBody AddRequest request) {
         return ResponseEntity.ok(add(request.link));
     }
 
-
-    @RequestMapping(path = "addhtml", method = RequestMethod.POST)
+    @PostMapping(path = "addhtml")
     public String addHtml(Model model, @RequestParam(value = "link") String link){
         AddResponse result = add(link);
         model.addAttribute("link", result.link);
@@ -50,7 +49,6 @@ public class AddController {
 
     @Data
     @AllArgsConstructor
-    @NoArgsConstructor
     public static class AddResponse implements Serializable {
         private String link;
         private String key;

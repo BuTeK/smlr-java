@@ -2,8 +2,8 @@ package by.home.butek.smlr.service;
 
 import by.home.butek.smlr.model.Link;
 import by.home.butek.smlr.model.repositories.LinkRepository;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -11,9 +11,11 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class DefaultKeyMapperServiceTest {
+class DefaultKeyMapperServiceTest {
 
     private static final String KEY = "aAbBcCbD";
     private static final String LINK_A = "http://google.com";
@@ -37,8 +39,8 @@ public class DefaultKeyMapperServiceTest {
     private LinkRepository repo;
 
 
-    @Before
-    public void init() {
+    @BeforeEach
+    void init() {
         MockitoAnnotations.initMocks(this);
 
         Mockito.when(converter.keyToId(KEY_A)).thenReturn(ID_A);
@@ -46,15 +48,15 @@ public class DefaultKeyMapperServiceTest {
         Mockito.when(converter.keyToId(KEY_B)).thenReturn(ID_B);
         Mockito.when(converter.idToKey(ID_B)).thenReturn(KEY_B);
 
-        Mockito.when(repo.findOne(Mockito.anyObject())).thenReturn(Optional.empty());
+        Mockito.when(repo.findById(Mockito.any())).thenReturn(Optional.empty());
         Mockito.when(repo.save(new Link(LINK_A))).thenReturn(LINK_OBJ_A);
         Mockito.when(repo.save(new Link(LINK_B))).thenReturn(LINK_OBJ_B);
-        Mockito.when(repo.findOne(ID_A)).thenReturn(Optional.of(LINK_OBJ_A));
-        Mockito.when(repo.findOne(ID_B)).thenReturn(Optional.of(LINK_OBJ_B));
+        Mockito.when(repo.findById(ID_A)).thenReturn(Optional.of(LINK_OBJ_A));
+        Mockito.when(repo.findById(ID_B)).thenReturn(Optional.of(LINK_OBJ_B));
     }
 
     @Test
-    public void  clientCanAddLink() {
+    void  clientCanAddLink() {
         final String keyA = service.add(LINK_A);
         assertEquals(LINK_A, service.getLink(keyA));
         final String keyB = service.add(LINK_B);
@@ -63,7 +65,7 @@ public class DefaultKeyMapperServiceTest {
     }
 
     @Test
-    public void  clientCanNotTakeLinkIfNotFoundIsService() {
+    void  clientCanNotTakeLinkIfNotFoundIsService() {
         assertNull(service.getLink(KEY));
     }
 

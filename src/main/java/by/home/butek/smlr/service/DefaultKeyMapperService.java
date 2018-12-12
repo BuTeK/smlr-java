@@ -19,12 +19,11 @@ public class DefaultKeyMapperService implements KeyMapperService {
 
     @Transactional
     public String add(String link) {
-        Link link1 = repo.save(new Link(link));
-        return converter.idToKey(link1.getId());
+        return converter.idToKey(repo.save(new Link(link)).getId());
     }
 
     public String getLink(String key) {
-        Optional<Link> result = repo.findOne(converter.keyToId(key));
+        Optional<Link> result = repo.findById(converter.keyToId(key));
         return result.map(Link::getText).orElse(null);
     }
 }

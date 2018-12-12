@@ -3,17 +3,17 @@ package by.home.butek.smlr.controller;
 import by.home.butek.smlr.SmlrApplication;
 import by.home.butek.smlr.controllers.RedirectController;
 import by.home.butek.smlr.service.KeyMapperService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -24,11 +24,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @TestPropertySource(locations = "classpath:repositories-test.properties")
-@ContextConfiguration(classes = SmlrApplication.class)
+@SpringBootTest(classes = SmlrApplication.class)
 @WebAppConfiguration
-public class RedirectControllerTest {
+class RedirectControllerTest {
 
     private static final String PATH = "aAbBcCdD";
     private static final String BAD_PATH = "ololo";
@@ -49,8 +49,8 @@ public class RedirectControllerTest {
     @InjectMocks
     private RedirectController controller;
 
-    @Before
-    public void init() {
+    @BeforeEach
+    void init() {
         MockitoAnnotations.initMocks(this);
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         Mockito.when(service.getLink(PATH)).thenReturn(HEADER_VALUE);
@@ -58,20 +58,20 @@ public class RedirectControllerTest {
     }
 
     @Test
-    public void controllerMustRedirectUsWhenRequestIsSuccessful() throws Exception {
+    void controllerMustRedirectUsWhenRequestIsSuccessful() throws Exception {
         mockMvc.perform(get("/" + PATH))
                 .andExpect(status().is(REDIRECT_STATUS))
                 .andExpect(header().string(HEADER_NAME, HEADER_VALUE));
     }
 
     @Test
-    public void controllerMustReturn404ifBadKey() throws Exception {
+    void controllerMustReturn404ifBadKey() throws Exception {
         mockMvc.perform(get("/" + BAD_PATH))
                 .andExpect(status().is(NOT_FOUND));
     }
 
     @Test
-    public void homeWorkFile() throws Exception {
+    void homeWorkFile() throws Exception {
         mockMvc.perform(get(""))
                 .andExpect(MockMvcResultMatchers.view().name("home"));
     }
