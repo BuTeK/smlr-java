@@ -141,4 +141,12 @@
         </plugins>
     </build>
 
+    <repositories>
+        <repository>
+            <id>maven.oracle.com</id>
+            <url>http://nexus.saas.hand-china.com/content/repositories/rdc/</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+
 </project>
