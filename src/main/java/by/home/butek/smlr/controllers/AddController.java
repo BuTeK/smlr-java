@@ -28,7 +28,6 @@ public class AddController {
         return ResponseEntity.ok(add(request.link));
     }
 
-
     @PostMapping(path = "addhtml")
     public String addHtml(Model model, @RequestParam(value = "link") String link){
         AddResponse result = add(link);
