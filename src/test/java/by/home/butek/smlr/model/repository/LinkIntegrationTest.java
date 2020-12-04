@@ -1,6 +1,6 @@
 package by.home.butek.smlr.model.repository;
 
-import by.home.butek.smlr.model.AbstractRepositoryTest;
+import by.home.butek.smlr.AbstractIntegrationTest;
 import by.home.butek.smlr.model.Link;
 import by.home.butek.smlr.model.repositories.LinkRepository;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
@@ -8,17 +8,15 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.TestPropertySource;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DatabaseSetup(LinkRepositoryTest.DATASET)
-@TestPropertySource(locations = "classpath:repositories-test.properties")
-@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = LinkRepositoryTest.DATASET)
-class LinkRepositoryTest extends AbstractRepositoryTest {
+@DatabaseSetup(LinkIntegrationTest.DATASET)
+@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = LinkIntegrationTest.DATASET)
+class LinkIntegrationTest extends AbstractIntegrationTest {
 
     static final String DATASET = "classpath:datasets/link-table.xml";
     private static final long LINK_NOT_FOUND = 1L;
