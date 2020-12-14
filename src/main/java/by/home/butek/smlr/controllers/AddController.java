@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.Serializable;
 
@@ -29,7 +32,7 @@ public class AddController {
     }
 
     @PostMapping(path = "addhtml")
-    public String addHtml(Model model, @RequestParam(value = "link") String link){
+    public String addHtml(Model model, @RequestParam(value = "link") String link) {
         AddResponse result = add(link);
         model.addAttribute("link", result.link);
         model.addAttribute("keyed", prefix + result.key);
